@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.pueslaimagen {
+  transform: scale(0.5);
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
