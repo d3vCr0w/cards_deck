@@ -1,12 +1,12 @@
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import AppNavbar from './AppNavbar';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import Image from './Image';
 
 function Game() {
   const {
-    state: { deckData, firstThrowData, player1, player2 },
+    state: { player1, player2, deckData, firstThrowData },
   } = useLocation();
   const [gameOver, setGameOver] = useState(false);
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ function Game() {
       <br />
       <Container>
         <Row>
-          <Col>Player 1</Col>
+          <Col>{player1}</Col>
           <Col>
             <Button
               variant='outline-success'
@@ -75,7 +75,7 @@ function Game() {
               &#9658;
             </Button>
           </Col>
-          <Col>Player 2</Col>
+          <Col>{[player2]}</Col>
         </Row>
         <hr />
         <Row>
@@ -112,30 +112,36 @@ function Game() {
         <Row>
           <Col>
             <Row>
-              {player1Cards.map((card) => (
-                <Col key={'id' + card.code}>
-                  <Image
-                    key={card.code}
-                    src={card.image}
-                    value={card.value}
-                    suit={card.suit}
-                  ></Image>
-                </Col>
-              ))}
+              {player1Cards
+                .slice(0)
+                .reverse()
+                .map((card) => (
+                  <div key={'id' + card.code}>
+                    <Image
+                      key={card.code}
+                      src={card.image}
+                      value={card.value}
+                      suit={card.suit}
+                    ></Image>
+                  </div>
+                ))}
             </Row>
           </Col>
           <Col>
             <Row>
-              {player2Cards.map((card) => (
-                <Col key={'id' + card.code}>
-                  <Image
-                    key={card.code}
-                    src={card.image}
-                    value={card.value}
-                    suit={card.suit}
-                  ></Image>
-                </Col>
-              ))}
+              {player2Cards
+                .slice(0)
+                .reverse()
+                .map((card) => (
+                  <div key={'id' + card.code}>
+                    <Image
+                      key={card.code}
+                      src={card.image}
+                      value={card.value}
+                      suit={card.suit}
+                    ></Image>
+                  </div>
+                ))}
             </Row>
           </Col>
         </Row>
